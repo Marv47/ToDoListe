@@ -1,0 +1,44 @@
+body{
+    background-color: aquamarine;
+}
+fieldset{
+    display: inline;
+    border: Solid 1px #171b1d; 
+}
+textarea{
+
+        width: 500px;
+        height: 150px;
+        resize: none;
+
+}
+:focus-visible { 
+    outline: Solid 1px #2284E6; 
+  } 
+  
+  div.element { 
+   padding: 5px; 
+   margin-bottom: 5px; 
+   border-bottom: Solid 1px #CECECE; 
+   cursor: Default; 
+   transition: background-color 0.5s; 
+  } 
+  
+  div.element:hover { 
+   background-color: rgba(223, 247, 255, 0.5); 
+  } 
+div#Liste{
+    width: 500px; 
+    height: 250px; 
+    overflow: Auto; 
+    background-color: #FFFFFF; 
+    background-image: 
+    linear-gradient(90deg, transparent 147px, #ABCED4 147px, #ABCED4 149px, transparent 149px); 
+    background-size: 100% 2.2em; 
+    resize: vertical; 
+}
+
+
+
+
+    

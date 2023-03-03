@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do Liste</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("speichern").addEventListener("click", speichern); auslesen(); 
+})
+
+function auslesen() { 
+    let liste = []; 
+    for (var i = 0; i < localStorage.length; i++) { 
+        if (localStorage.key(i).includes("-todo-")) { 
+            var teil = localStorage.key(i).split("-"); 
+            var datum = teil[2] + '.' + teil[1] + '.' + teil[0]; 
+            var inhalt = '<!-- ' + teil[0] + '-' + teil[1] + '-' + teil[2] + ' -->' + 
+            '<div class="element" id="' + localStorage.key(i) + '">' + 
+            '<button type="button" title="Löschen" onClick="entfernen(`' + localStorage.key(i) + '`)">x</button>' + 
+            '&emsp;' + datum  + '&emsp;' + localStorage.getItem(localStorage.key(i)) + '</div>'; 
+            liste.push(inhalt); 
+ } 
+}
+
+ liste.sort(); 
+ document.querySelector("#liste").innerHTML = liste.join(""); 
+
+}
+function speichern() { 
+    if (document.getElementById("Form").reportValidity()) { 
+        var rnd = Math.round(Math.random() * 10000); 
+        var key = document.getElementById("key").value + '-todo-' + rnd; 
+        var wert = document.getElementById("wert").value; 
+        window.localStorage.setItem(key, wert); 
+        document.getElementById("Form").reset(); 
+        auslesen(); 
+ } 
+}
+
+function entfernen(id) { 
+    console.log(id); 
+    if (document.getElementById(id)) { 
+        window.localStorage.removeItem(id); 
+        document.getElementById(id).remove(); 
+ } 
+} 
+    </script>
+</head>
+<body>
+
+    <form id="Form">
+
+        <fieldset>
+
+            <legend>To-Do</legend>
+            <p>
+                <label>Text :<br>
+                    <textarea id="wert" required="required"></textarea></label>
+            </p>
+            <p>
+                <label>Datum :
+                    <input type="date" id="key" required="required" value="<?date("Y-m-d");?></label>&emsp;
+                <button type="button" id="speichern" >speichern</button>
+            </p>
+
+            <div id="Liste"></div>
+
+        </fieldset>
+
+    </form>
+  
+ </body>
+</html>
