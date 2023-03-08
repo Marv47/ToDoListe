@@ -8,8 +8,23 @@
     <link rel="stylesheet" href="style.css">
     <script>
         window.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("speichern").addEventListener("click", speichern); auslesen(); 
-})
+    document.getElementById("speichern").addEventListener("click", speichern); auslesen;
+});
+
+function speichern() {
+    var heute = new Date(); // aktuelles Datum erzeugen
+    var jahr = heute.getFullYear().toString().padStart(4, '0'); // Jahr extrahieren
+    var monat = (heute.getMonth() + 1).toString().padStart(2, '0'); // Monat extrahieren
+    var tag = heute.getDate().toString().padStart(2, '0'); // Tag extrahieren
+    var key = jahr + '-' + monat + '-' + tag + '-todo-' + Math.round(Math.random() * 10000); // Datum und Zufallszahl zu Schlüssel zusammenführen
+    var wert = document.getElementById("wert").value;
+    window.localStorage.setItem(key, wert);
+    document.getElementById("Form").reset();
+    auslesen();
+};
+
+
+
 
 function auslesen() { 
     let liste = []; 
@@ -20,25 +35,20 @@ function auslesen() {
             var inhalt = '<!-- ' + teil[0] + '-' + teil[1] + '-' + teil[2] + ' -->' + 
             '<div class="element" id="' + localStorage.key(i) + '">' + 
             '<button type="button" title="Löschen" onClick="entfernen(`' + localStorage.key(i) + '`)">x</button>' + 
-            '&emsp;' + datum  + '&emsp;' + localStorage.getItem(localStorage.key(i)) + '</div>'; 
+            '<span class="datum">' + datum  + '</span>' + 
+            '<span class="text">' + localStorage.getItem(localStorage.key(i)) + '</span>' + 
+            '</div>'; 
             liste.push(inhalt); 
- } 
-}
+        } 
+    }
 
- liste.sort(); 
- document.querySelector("#liste").innerHTML = liste.join(""); 
+    liste.sort(); 
+    document.querySelector("#Liste").innerHTML = liste.join("");
+    liste.reverse(); 
+};
 
-}
-function speichern() { 
-    if (document.getElementById("Form").reportValidity()) { 
-        var rnd = Math.round(Math.random() * 10000); 
-        var key = document.getElementById("key").value + '-todo-' + rnd; 
-        var wert = document.getElementById("wert").value; 
-        window.localStorage.setItem(key, wert); 
-        document.getElementById("Form").reset(); 
-        auslesen(); 
- } 
-}
+
+
 
 function entfernen(id) { 
     console.log(id); 

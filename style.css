@@ -37,6 +37,25 @@ div#Liste{
     background-size: 100% 2.2em; 
     resize: vertical; 
 }
+.element {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.element > span {
+    display: inline-block;
+    padding: 15px;
+}
+
+span.datum {
+    width: 20%;
+}
+
+span.text {
+    width: 80%;
+}
+
 
 
 
